@@ -46,7 +46,6 @@ public class CoinXrpService {
     private String rippleUrl;
     private String getUrl = "https://s.altnet.rippletest.net:51234";
     private String postUrl = "https://s1.ripple.com:51234";
-    @Value("${ripple.deposit.account}")
     private String address;
     private String password = "";
 
@@ -64,11 +63,11 @@ public class CoinXrpService {
     private final static String METHOD_POST_ACCOUNT_INFO = "account_info";
     private final static String METHOD_POST_SUBMIT = "submit";
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String args[]) {
         CoinXrpService XRPUtils = new CoinXrpService();
-//    	System.out.println(XRPUtils.send("rG2pkYL2q9jDnEA7xraKH7gXLXo17Tj4tX", 0.1));
+    	System.out.println(XRPUtils.send("rwXh8Pgx1C5VBPkr8xyMDB7SqeP9z5nMvR", 0.1));
 //    	System.out.println(XRPUtils.parseTransaction("0"));
-        System.out.println(XRPUtils.sign("rG2pkYL2q9jDnEA7xraKH7gXLXo17Tj4tX", 1000.0));
+//        System.out.println(XRPUtils.sign("rG2pkYL2q9jDnEA7xraKH7gXLXo17Tj4tX", 1000.0));
     }
 
     public String getAddress() {
@@ -89,7 +88,7 @@ public class CoinXrpService {
             log.error("签名失败:{}", toAddress);
             return null;
         }
-        HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Object> params = new HashMap<>(16);
         params.put("tx_blob", txBlob);
         //签名
         JSONObject json = doRequest(METHOD_POST_SUBMIT, params);
@@ -162,7 +161,7 @@ public class CoinXrpService {
      * @return
      */
     public long getAccountSequence() {
-        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params = new HashMap<>(16);
         params.put("account", address);
         params.put("strict", "true");
         params.put("ledger_index", "current");

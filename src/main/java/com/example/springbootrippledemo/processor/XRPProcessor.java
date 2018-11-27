@@ -22,4 +22,11 @@ public interface XRPProcessor {
     void ledger();
 
     void walletPropose();
+
+    /**
+     * only for development and test
+     */
+    void submit(String toAddress, double value);
+
+    void sign(String toAddress, double value);
 }

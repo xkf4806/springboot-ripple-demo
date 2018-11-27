@@ -47,4 +47,9 @@ public class SpringbootRippleDemoApplicationTests {
     public void testWalletPropose() {
         xrpProcessor.walletPropose();
     }
+
+    @Test
+    public void testSign() {
+        xrpProcessor.sign("rwXh8Pgx1C5VBPkr8xyMDB7SqeP9z5nMvR", 2.89);
+    }
 }
